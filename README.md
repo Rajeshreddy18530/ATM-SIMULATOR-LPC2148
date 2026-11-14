@@ -1,28 +1,23 @@
-# ATM-SIMULATOR-LPC2148
-ATM Simulator with Real-Time Transaction Logging using LPC2148
-
 ATM Simulator with Real-Time Transaction Logging using LPC2148
 
 1. Project Overview
 
 The ATM Simulator with Real-Time Transaction Logging is an embedded systems project developed using the LPC2148 ARM7 microcontroller.
 
-The system simulates basic ATM operations such as PIN authentication, balance enquiry, cash withdrawal, cash deposit, PIN change, and transaction history.
+This project simulates ATM operations such as user authentication, balance enquiry, cash withdrawal, cash deposit, PIN change, and transaction history.
 
-It uses a 16x2 LCD to display information, a 4x4 keypad for user input, an internal RTC to maintain date and time, and UART communication to transmit transaction details to a computer.
+It uses a 16x2 LCD for displaying information, a 4x4 matrix keypad for user input, an internal RTC for date and time, and UART communication for transaction logging.
 
-An external interrupt is used to access the RTC date and time editing menu.
-
-2. Project Objectives
+2. Objectives
 
 - To develop an ATM simulation using the LPC2148 microcontroller.
-- To implement PIN-based user authentication.
-- To perform balance enquiry, deposit, and withdrawal operations.
+- To implement PIN-based authentication.
+- To perform deposit and withdrawal operations.
+- To display account balance.
 - To maintain transaction history.
-- To display date and time using the internal RTC.
-- To generate transaction logs through UART communication.
+- To implement RTC-based date and time.
+- To send transaction details through UART.
 - To implement external interrupt functionality.
-- To interface LCD, keypad, RTC, UART, and buzzer.
 
 3. Features
 
@@ -33,34 +28,33 @@ An external interrupt is used to access the RTC date and time editing menu.
 - Cash deposit.
 - PIN change.
 - Transaction history.
-- Real-time clock using internal RTC.
-- RTC date and time editing using external interrupt.
+- Real-Time Clock.
+- External interrupt for RTC editing.
 - UART-based transaction logging.
-- LCD-based user interface.
-- Buzzer indication.
+- LCD display and buzzer indication.
 
 4. Hardware Requirements
 
-Component| Purpose
-LPC2148 ARM7| Main controller
-16x2 LCD| Displays ATM information
-4x4 Matrix Keypad| User input
-Buzzer| Audio indication
-Push Button| External interrupt
-Computer| UART transaction monitoring
-USB-to-UART interface| Serial communication, if required
+S.No| Component| Purpose
+1| LPC2148 ARM7| Main controller
+2| 16x2 LCD| Display
+3| 4x4 Keypad| User input
+4| Buzzer| Audio indication
+5| Push Button| External interrupt
+6| Computer| Transaction monitoring
+7| USB-to-UART interface| Serial communication, if required
 
 5. Software Requirements
 
-- Keil µVision IDE
-- Embedded C
-- Flash Magic
-- UART Serial Terminal
-- LPC2148 development board
+S.No| Software| Purpose
+1| Keil µVision| Embedded C development
+2| Embedded C| Programming language
+3| Flash Magic| Microcontroller programming
+4| Serial Terminal| UART monitoring
 
 6. System Architecture
 
-The LPC2148 acts as the central controller and communicates with the LCD, keypad, RTC, buzzer, and computer through UART.
+The LPC2148 acts as the central controller. It communicates with the keypad, LCD, RTC, buzzer, and computer.
 
 flowchart TD
     A[User] --> B[4x4 Keypad]
@@ -72,9 +66,11 @@ flowchart TD
     C --> H[Buzzer]
     I[External Interrupt Button] --> C
 
-7. Hardware Interfacing and Pin Connections
+7. Hardware Interfacing
 
 7.1 LCD Interfacing
+
+The 16x2 LCD is used to display ATM menus, account information, balance, and transaction status.
 
 LCD Pin| LPC2148 Pin
 D0| P0.8
@@ -99,9 +95,9 @@ flowchart LR
 
 7.2 Keypad Interfacing
 
-The 4x4 matrix keypad is used to enter the account number, PIN, transaction amount, and menu selections.
+A 4x4 matrix keypad is used to enter the account number, PIN, amount, and menu selections.
 
-Keypad Connection| LPC2148 Pin
+Keypad Pin| LPC2148 Pin
 Row 0| P1.16
 Row 1| P1.17
 Row 2| P1.18
@@ -123,21 +119,14 @@ flowchart TD
 
 7.3 RTC Interfacing
 
-The LPC2148 contains an internal Real-Time Clock module.
+The internal RTC of LPC2148 maintains the current date and time.
 
-It maintains:
+It provides seconds, minutes, hours, day, month, and year.
 
-- Seconds
-- Minutes
-- Hours
-- Day
-- Month
-- Year
-
-The RTC is used to associate date and time information with ATM transactions.
+RTC Working Flowchart
 
 flowchart TD
-    A[Power On] --> B[Initialize RTC]
+    A[Start] --> B[Initialize RTC]
     B --> C[Read RTC Registers]
     C --> D[Get Date and Time]
     D --> E[Display Time on LCD]
@@ -145,15 +134,17 @@ flowchart TD
 
 7.4 External Interrupt
 
-An external interrupt is connected to P0.3 (EINT1).
+The external interrupt EINT1 is connected to P0.3.
 
-When the interrupt button is pressed, the controller enters the RTC editing menu.
+When the interrupt button is pressed, the system opens the RTC editing menu.
+
+External Interrupt Flowchart
 
 flowchart TD
     A[ATM Main Program] --> B{Interrupt Button Pressed?}
     B -- No --> A
     B -- Yes --> C[EINT1 Interrupt]
-    C --> D[Execute Interrupt Service Routine]
+    C --> D[Execute ISR]
     D --> E[Open RTC Menu]
     E --> F[Edit Date or Time]
     F --> G[Update RTC]
@@ -162,27 +153,30 @@ flowchart TD
 
 7.5 Buzzer Interfacing
 
-The buzzer is connected to P0.19 and is configured as an active-HIGH output.
+The buzzer is connected to P0.19.
 
-- Logic HIGH: Buzzer ON
-- Logic LOW: Buzzer OFF
+- Logic HIGH: Buzzer ON.
+- Logic LOW: Buzzer OFF.
 
-It provides audio indication during specified ATM events.
+The buzzer provides audio indication during specified ATM events.
 
-7.6 UART Communication
+7.6 UART Interfacing
 
-UART0 is used to send transaction details to a computer.
+UART0 is used to transmit transaction information to a computer.
 
 UART Signal| LPC2148 Pin
 TXD0| P0.0
 RXD0| P0.1
 
-UART configuration:
+UART Configuration
 
-- Baud rate: 9600
-- Data bits: 8
-- Parity: None
-- Stop bits: 1
+Parameter| Value
+Baud Rate| 9600
+Data Bits| 8
+Parity| None
+Stop Bits| 1
+
+UART Communication Diagram
 
 flowchart LR
     A[ATM Transaction] --> B[LPC2148]
@@ -196,14 +190,14 @@ flowchart LR
 
 8.1 User Authentication
 
-The user enters an account number and PIN through the keypad.
+The user enters an account number and PIN through the keypad. The system validates the entered details before allowing access.
 
-The system validates the entered credentials before allowing access to the ATM menu.
+Demonstration credentials:
 
-The demonstration program uses:
-
-- Account number: 2004
-- Initial PIN: 1234
+Parameter| Value
+Account Number| 2004
+Initial PIN| 1234
+Initial Balance| 5000
 
 8.2 Balance Enquiry
 
@@ -211,17 +205,13 @@ The user selects balance enquiry to view the available account balance on the LC
 
 8.3 Cash Withdrawal
 
-The user enters the withdrawal amount.
-
-The system checks the amount and available balance before processing the withdrawal.
+The user enters the withdrawal amount. The system checks the amount and available balance before processing the withdrawal.
 
 The withdrawal amount must be a multiple of 100.
 
 8.4 Cash Deposit
 
-The user enters the deposit amount.
-
-The system adds the entered amount to the available balance.
+The user enters the deposit amount. The system adds the entered amount to the account balance.
 
 8.5 PIN Change
 
@@ -229,9 +219,7 @@ The user can change the existing PIN by entering the current PIN and providing a
 
 8.6 Transaction History
 
-The system stores recent transactions in an internal transaction history array.
-
-The program supports up to 10 stored transactions.
+The system stores recent transactions in an internal transaction history array. The program supports up to 10 stored transactions.
 
 9. Complete ATM Working Flowchart
 
@@ -284,14 +272,16 @@ flowchart TD
 
 11. UART Transaction Logging
 
-Whenever a transaction is performed, the system can transmit the transaction details through UART0.
+Whenever a transaction is performed, the system can transmit transaction details through UART0.
 
-The log can contain:
+Transaction information can include:
 
-- Transaction type
-- Transaction amount
-- Updated balance
-- Date and time
+- Transaction type.
+- Transaction amount.
+- Updated balance.
+- Date and time.
+
+Transaction Logging Sequence
 
 sequenceDiagram
     actor User
@@ -346,14 +336,12 @@ ATM-Simulator-LPC2148/
 
 13. Testing
 
-The following operations can be tested on the LPC2148 development board:
-
-Test| Expected Result
+Test Case| Expected Result
 Valid account and PIN| ATM menu displayed
 Invalid PIN| Login attempt rejected
 Balance enquiry| Current balance displayed
-Withdrawal| Balance updated
-Deposit| Balance updated
+Cash withdrawal| Balance updated
+Cash deposit| Balance updated
 PIN change| New PIN accepted
 Transaction history| Stored transactions displayed
 Interrupt button| RTC menu opened
@@ -363,22 +351,20 @@ UART communication| Transaction details received on PC
 
 - This is an educational ATM simulation, not a real banking system.
 - Account information and balance are demonstration values.
-- The transaction history is limited by the program's internal storage.
+- Transaction history is limited by internal storage.
 - UART logging requires a serial connection to a computer.
-- The displayed lock message is part of the demonstration login logic and should not be treated as a secure 24-hour account lock.
+- The lock message is demonstration logic and does not implement a secure 24-hour account lock.
 
 15. Future Enhancements
 
 - Add EEPROM-based permanent transaction storage.
 - Add multiple user accounts.
-- Add an SD card for transaction logging.
-- Add GSM or Wi-Fi-based notifications.
-- Add password encryption and improved security.
-- Add a graphical user interface for transaction monitoring.
+- Add SD card-based transaction logging.
+- Add GSM or Wi-Fi notifications.
+- Improve PIN security through encryption.
+- Develop a graphical interface for transaction monitoring.
 
 16. Learning Outcomes
-
-Through this project, the following embedded systems concepts are implemented:
 
 - ARM7 LPC2148 microcontroller programming.
 - Embedded C programming.
