@@ -134,3 +134,138 @@ A 4x4 matrix keypad is used to enter the ATM PIN, select menu options, and enter
 2. When a key is pressed, the corresponding row and column are identified.
 3. The pressed key value is returned to the ATM program.
 4. The entered value is used for PIN verification or ATM operations.
+
+### 7.3 Real-Time Clock (RTC) Interfacing
+
+The internal RTC (Real-Time Clock) of the LPC2148 is used to maintain the current date and time.
+
+The RTC provides timestamp information for ATM transactions.
+
+**Working:**
+
+1. The RTC is initialized during system startup.
+2. It maintains the current date and time.
+3. When a transaction occurs, the ATM reads the RTC values.
+4. The date and time are included in the transaction log.
+5. The transaction details are transmitted through UART0.
+
+**RTC Registers Used:**
+
+- `CCR` – Controls RTC operation.
+- `PREINT` – Integer part of the prescaler.
+- `PREFRAC` – Fractional part of the prescaler.
+- `SEC`, `MIN`, `HOUR` – Store time information.
+- `DOM`, `MONTH`, `YEAR` – Store date information.
+
+### 7.4 UART0 Interfacing
+
+UART0 (Universal Asynchronous Receiver/Transmitter) is used for serial communication between the LPC2148 microcontroller and the computer.
+
+In this project, UART0 is used to display ATM transaction details on a serial terminal.
+
+**UART0 Pin Connections**
+
+| UART0 Signal | LPC2148 Pin |
+|---|---|
+| TXD0 | P0.0 |
+| RXD0 | P0.1 |
+
+**UART Configuration**
+
+| Parameter | Value |
+|---|---|
+| Baud Rate | 9600 |
+| Data Bits | 8 |
+| Parity | None |
+| Stop Bits | 1 |
+
+**Working:**
+
+1. UART0 is initialized with a baud rate of 9600.
+2. When a transaction is completed, the ATM prepares the transaction details.
+3. The transaction date and time are obtained from the RTC.
+4. The details are transmitted through UART0.
+5. The information is displayed on the computer's serial terminal.
+
+### 7.5 Buzzer Interfacing
+
+A buzzer is connected to the LPC2148 microcontroller to provide an audio alert during ATM operations.
+
+**Buzzer Pin Connection**
+
+| Component | LPC2148 Pin |
+|---|---|
+| Buzzer | P0.19 |
+
+**Working:**
+
+1. The buzzer is controlled through the LPC2148 GPIO pin P0.19.
+2. The buzzer turns ON when the GPIO pin is set HIGH.
+3. It turns OFF when the GPIO pin is cleared LOW.
+4. It provides an alert during the ATM lock condition.
+
+### 7.6 External Interrupt Interfacing
+
+The external interrupt feature of the LPC2148 is used to detect a button press without continuously checking the button in the main program.
+
+In this project, External Interrupt 1 (EINT1) is used.
+
+**Pin Connection**
+
+| Signal | LPC2148 Pin |
+|---|---|
+| EINT1 | P0.3 |
+
+**Working:**
+
+1. EINT1 is configured as an external interrupt input.
+2. When the interrupt button is pressed, the microcontroller detects the interrupt.
+3. The interrupt service routine (ISR) is executed.
+4. The ISR sets the `interruptFlag` variable.
+5. The main program checks this flag and performs the required operation.
+6. The interrupt flag is cleared after handling the interrupt.
+
+## 8. ATM Operations
+
+The ATM Simulator supports the following operations after successful PIN verification.
+
+### 8.1 User Authentication
+
+- The user enters the account PIN using the keypad.
+- The system verifies the entered PIN.
+- If the PIN is correct, the ATM menu is displayed.
+- If the PIN is incorrect, the user gets another attempt.
+- After three incorrect attempts, the ATM enters the lock condition.
+
+### 8.2 Balance Enquiry
+
+- The user selects the balance enquiry option.
+- The current account balance is retrieved.
+- The balance is displayed on the LCD.
+
+### 8.3 Cash Withdrawal
+
+- The user selects the withdrawal option.
+- The withdrawal amount is entered using the keypad.
+- The system checks whether the amount is a multiple of 100.
+- It also checks whether sufficient balance is available.
+- If all conditions are satisfied, the amount is deducted from the account balance.
+
+### 8.4 Cash Deposit
+
+- The user selects the deposit option.
+- The deposit amount is entered using the keypad.
+- The system checks whether the amount is a multiple of 100.
+- If valid, the amount is added to the account balance.
+
+### 8.5 Transaction History
+
+- The system stores transaction details.
+- The user can view the available transaction history.
+- Transaction details include the operation, amount, and timestamp.
+
+### 8.6 Transaction Logging
+
+- The RTC provides the date and time.
+- Transaction details are transmitted through UART0.
+- The details are displayed on the serial terminal.
