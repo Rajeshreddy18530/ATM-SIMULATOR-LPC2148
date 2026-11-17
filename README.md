@@ -85,3 +85,28 @@ flowchart TD
 5. The RTC provides the current date and time.
 6. Transaction details are transmitted through UART0.
 7. The LCD displays the transaction result.
+## 7. Hardware Interfacing
+
+The LPC2148 microcontroller is connected to different hardware components to perform ATM operations.
+
+The following components are interfaced with the microcontroller:
+
+- 16x2 LCD Display
+- 4x4 Matrix Keypad
+- Real-Time Clock (RTC)
+- UART0 Communication
+- Buzzer
+- External Interrupt Button
+
+### 7.1 LCD Interfacing
+
+A 16x2 LCD is used to display ATM messages, PIN entry prompts, account balance, and transaction status.
+
+**LCD Pin Connections**
+
+| LCD Pin | LPC2148 Pin |
+|---|---|
+| D0-D7 | P0.8-P0.15 |
+| RS | P0.16 |
+| RW | P0.17 |
+| EN | P0.18 |
