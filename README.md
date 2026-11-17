@@ -338,3 +338,164 @@ flowchart TD
 | uart.c | Serial communication |
 | interrupt.c | External interrupt handling |
 | delay.c | Delay generation |
+
+## 11. Real-Time Transaction Logging
+
+The ATM Simulator provides real-time transaction logging using the internal RTC and UART0 communication.
+
+Whenever a transaction is performed, the system records the transaction details along with the date and time.
+
+### Transaction Logging Process
+
+1. The user performs a transaction such as deposit or withdrawal.
+2. The ATM updates the account balance.
+3. The RTC provides the current date and time.
+4. The transaction details are prepared.
+5. UART0 transmits the details to the computer.
+6. The transaction information is displayed on the serial terminal.
+
+### Transaction Logging Diagram
+
+```mermaid
+flowchart TD
+    A[User Performs Transaction] --> B[Update Account Balance]
+    B --> C[Read RTC Date and Time]
+    C --> D[Prepare Transaction Details]
+    D --> E[Transmit Through UART0]
+    E --> F[Display on Serial Terminal]
+```
+
+### Transaction Information
+
+The transaction log can contain:
+
+- Transaction type
+- Transaction amount
+- Updated account balance
+- Transaction date
+- Transaction time
+
+**Note:** The project maintains a transaction history with a maximum capacity of 10 transactions.
+
+## 12. Project Folder Structure
+
+The project source code is organized into separate files based on their functionality.
+
+```text
+ATM-Simulator-LPC2148/
+│
+├── README.md
+│
+├── source_files/
+│   ├── main.c
+│   ├── atm.c
+│   ├── interrupt.c
+│   ├── rtc.c
+│   ├── uart.c
+│   ├── kpm.c
+│   ├── lcd.c
+│   └── delay.c
+│
+├── header_files/
+│   ├── atm.h
+│   ├── interrupt.h
+│   ├── rtc.h
+│   ├── uart.h
+│   ├── uart_defines.h
+│   ├── kpm.h
+│   ├── kpm_defines.h
+│   ├── lcd.h
+│   ├── lcd_defines.h
+│   ├── delay.h
+│   ├── defines.h
+│   └── types.h
+│
+├── images/
+│
+└── test_results/
+```
+
+**Note:** Update the folder names and file names according to the actual structure of your GitHub repository.
+
+## 13. Testing and Results
+
+The ATM Simulator was tested to verify the working of different operations and hardware components.
+
+### Test Cases
+
+| Test Case | Expected Result |
+|---|---|
+| Correct PIN | ATM menu should be displayed |
+| Incorrect PIN | Error message should be displayed |
+| Three incorrect PIN attempts | ATM lock alert should be activated |
+| Balance Enquiry | Current balance should be displayed |
+| Valid Withdrawal | Amount should be deducted |
+| Invalid Withdrawal | Error message should be displayed |
+| Valid Deposit | Amount should be added |
+| Transaction History | Stored transactions should be displayed |
+| UART Communication | Transaction details should appear on the serial terminal |
+| RTC Functionality | Date and time should be available for transaction logging |
+| External Interrupt | Interrupt service routine should execute when the button is pressed |
+
+### Observed Results
+
+- LCD displays ATM messages and transaction details.
+- Keypad accepts user input.
+- PIN verification controls access to ATM operations.
+- Deposit and withdrawal operations update the account balance.
+- RTC provides timestamp information.
+- UART0 transmits transaction details to the serial terminal.
+- Buzzer provides an audio alert during the lock condition.
+
+  ## 14. Project Limitations
+
+The ATM Simulator is an embedded system prototype developed for learning and demonstration purposes. It has the following limitations:
+
+1. The project uses a predefined account number and PIN.
+2. The account balance is maintained in program memory and is not connected to a real banking database.
+3. The transaction history can store a maximum of 10 transactions.
+4. The system does not support real bank transactions or online payment services.
+5. The external interrupt functionality depends on the connected hardware button.
+6. UART transaction logging requires a serial terminal and a proper communication connection.
+7. The ATM lock mechanism is a demonstration feature and does not provide a real 24-hour security lock.
+8. The project does not include advanced banking security features such as encryption or biometric authentication.
+
+## 15. Future Enhancements
+
+The ATM Simulator can be improved with additional features in the future.
+
+1. **Multiple User Accounts:** Support multiple users with separate account details and PINs.
+2. **EEPROM Storage:** Store account details and transaction history in non-volatile memory.
+3. **Improved Security:** Add PIN encryption and stronger authentication methods.
+4. **Biometric Authentication:** Integrate fingerprint authentication for secure access.
+5. **GSM Communication:** Send transaction notifications through SMS.
+6. **Advanced Display:** Use a graphical LCD or OLED display for a better user interface.
+7. **Database Integration:** Store transaction records in an external database.
+8. **Additional ATM Operations:** Implement fund transfer and mini-statement features.
+
+## 16. Learning Outcomes
+
+Through this project, the following technical skills and concepts were learned:
+
+1. Understanding the LPC2148 ARM7 microcontroller architecture.
+2. Developing embedded applications using Embedded C.
+3. Interfacing a 16x2 LCD with a microcontroller.
+4. Understanding 4x4 matrix keypad scanning.
+5. Working with the internal Real-Time Clock (RTC).
+6. Configuring UART0 for serial communication.
+7. Implementing external interrupts and interrupt service routines.
+8. Understanding GPIO pin configuration and control.
+9. Dividing embedded software into multiple modules.
+10. Implementing ATM operations and real-time transaction logging.
+
+## 17. Conclusion
+
+The ATM Simulator with Real-Time Transaction Logging using LPC2148 is an embedded systems project developed using Embedded C.
+
+The project demonstrates ATM operations such as PIN verification, balance enquiry, cash withdrawal, cash deposit, and transaction history.
+
+The LPC2148 microcontroller controls the connected peripherals, including the LCD, keypad, RTC, buzzer, and UART0.
+
+The RTC provides date and time information, while UART0 enables real-time transaction logging on a serial terminal.
+
+This project provides practical experience in microcontroller programming, hardware interfacing, peripheral configuration, interrupt handling, and embedded system development.
