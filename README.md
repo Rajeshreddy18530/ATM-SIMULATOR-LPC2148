@@ -110,3 +110,27 @@ A 16x2 LCD is used to display ATM messages, PIN entry prompts, account balance, 
 | RS | P0.16 |
 | RW | P0.17 |
 | EN | P0.18 |
+
+### 7.2 Keypad Interfacing
+
+A 4x4 matrix keypad is used to enter the ATM PIN, select menu options, and enter transaction amounts.
+
+**Keypad Pin Connections**
+
+| Keypad Pins | LPC2148 Pins |
+|---|---|
+| Row 1 | P1.16 |
+| Row 2 | P1.17 |
+| Row 3 | P1.18 |
+| Row 4 | P1.19 |
+| Column 1 | P1.20 |
+| Column 2 | P1.21 |
+| Column 3 | P1.22 |
+| Column 4 | P1.23 |
+
+**Working:**
+
+1. The microcontroller scans the keypad rows and columns.
+2. When a key is pressed, the corresponding row and column are identified.
+3. The pressed key value is returned to the ATM program.
+4. The entered value is used for PIN verification or ATM operations.
