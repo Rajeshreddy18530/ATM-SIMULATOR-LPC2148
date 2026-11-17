@@ -59,3 +59,29 @@ An external interrupt is used to access the RTC date and time editing menu.
 - Embedded C Programming
 - Flash Magic
 - UART Serial Terminal
+  ## 2. System Architecture
+
+The ATM Simulator uses the LPC2148 microcontroller as the main controller. The keypad is used to enter the PIN and select ATM operations. The LCD displays messages and account details. The RTC provides date and time information, while UART0 sends transaction details to the serial terminal.
+
+### System Block Diagram
+
+```mermaid
+flowchart TD
+    A[User] --> B[4x4 Keypad]
+    B --> C[LPC2148 Microcontroller]
+    C --> D[16x2 LCD Display]
+    C --> E[RTC Module]
+    C --> F[UART0 Communication]
+    C --> G[Buzzer]
+    F --> H[Serial Terminal]
+```
+
+### Working Principle
+
+1. The user enters the PIN using the keypad.
+2. The LPC2148 checks the entered PIN.
+3. After successful login, the ATM displays the available operations.
+4. The user selects deposit, withdrawal, balance enquiry, or transaction history.
+5. The RTC provides the current date and time.
+6. Transaction details are transmitted through UART0.
+7. The LCD displays the transaction result.
