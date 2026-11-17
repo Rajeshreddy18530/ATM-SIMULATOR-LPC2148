@@ -303,3 +303,38 @@ flowchart TD
     R -- Yes --> I
     R -- No --> Z
 ```
+
+## 10. Software Architecture
+
+The project is developed using Embedded C and divided into multiple modules. Each module performs a specific function, making the program easier to understand, maintain, and debug.
+
+### Software Module Diagram
+
+```mermaid
+flowchart TD
+    A[main.c] --> B[ATM Module]
+    A --> C[LCD Module]
+    A --> D[Keypad Module]
+    A --> E[RTC Module]
+    A --> F[UART Module]
+    A --> G[Interrupt Module]
+    A --> H[Delay Module]
+
+    B --> C
+    B --> D
+    B --> E
+    B --> F
+```
+
+### Description of Software Modules
+
+| Module | Responsibility |
+|---|---|
+| main.c | Main program execution |
+| atm.c | ATM operations and transaction management |
+| lcd.c | LCD display control |
+| kpm.c | Keypad input handling |
+| rtc.c | Date and time management |
+| uart.c | Serial communication |
+| interrupt.c | External interrupt handling |
+| delay.c | Delay generation |
