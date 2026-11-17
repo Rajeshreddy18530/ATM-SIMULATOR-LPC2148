@@ -269,3 +269,37 @@ The ATM Simulator supports the following operations after successful PIN verific
 - The RTC provides the date and time.
 - Transaction details are transmitted through UART0.
 - The details are displayed on the serial terminal.
+
+## 9. ATM Program Flowchart
+
+The following flowchart explains the overall working of the ATM Simulator, from system initialization to transaction completion.
+
+### ATM Working Flowchart
+
+```mermaid
+flowchart TD
+    A([Start]) --> B[Initialize LCD, Keypad, RTC, UART and Interrupt]
+    B --> C[Display Welcome Message]
+    C --> D[Enter PIN]
+    D --> E{PIN Correct?}
+    E -- No --> F[Increase Wrong Attempt Count]
+    F --> G{Three Attempts Completed?}
+    G -- No --> D
+    G -- Yes --> H[Activate ATM Lock Alert]
+    H --> Z([End])
+    E -- Yes --> I[Display ATM Menu]
+    I --> J[Select Operation]
+    J --> K{Operation}
+    K --> L[Balance Enquiry]
+    K --> M[Cash Withdrawal]
+    K --> N[Cash Deposit]
+    K --> O[Transaction History]
+    L --> P[Display Result]
+    M --> P
+    N --> P
+    O --> P
+    P --> Q[Log Transaction Using RTC and UART0]
+    Q --> R{Continue?}
+    R -- Yes --> I
+    R -- No --> Z
+```
