@@ -1,4 +1,4 @@
-# ATM Simulator with Real-Time Transaction Logging using LPC2148
+gy# ATM Simulator with Real-Time Transaction Logging using LPC2148
 
 ## 1. Project Overview
 
@@ -381,7 +381,7 @@ The transaction log can contain:
 
 The project source code is organized into separate files based on their functionality.
 
-ATM-Simulator-LPC2148/
+ATM-SIMULATOR-LPC2148/
 │
 ├── README.md
 │
@@ -415,7 +415,7 @@ ATM-Simulator-LPC2148/
 │   └── result2.jpeg
 │
 └── videos/
-    ├── resultonpc.mp4
+    ├── resultonkit/
     └── resultonkit.mp4
 
 ## 13. Testing and Results
