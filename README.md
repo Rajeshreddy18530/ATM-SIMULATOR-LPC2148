@@ -381,7 +381,6 @@ The transaction log can contain:
 
 The project source code is organized into separate files based on their functionality.
 
-```text
 ATM-Simulator-LPC2148/
 │
 ├── README.md
@@ -410,12 +409,14 @@ ATM-Simulator-LPC2148/
 │   ├── defines.h
 │   └── types.h
 │
-├── images/
+├── image/
+│   ├── log.jpeg
+│   ├── result1.jpeg
+│   └── result2.jpeg
 │
 └── videos/
-```
-
-**Note:** Update the folder names and file names according to the actual structure of your GitHub repository.
+    ├── resultonpc.mp4
+    └── resultonkit.mp4
 
 ## 13. Testing and Results
 
