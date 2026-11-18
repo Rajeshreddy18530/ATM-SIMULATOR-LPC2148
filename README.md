@@ -412,7 +412,7 @@ ATM-Simulator-LPC2148/
 │
 ├── images/
 │
-└── test_results/
+└── videos/
 ```
 
 **Note:** Update the folder names and file names according to the actual structure of your GitHub repository.
