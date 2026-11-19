@@ -377,12 +377,14 @@ The transaction log can contain:
 
 **Note:** The project maintains a transaction history with a maximum capacity of 10 transactions.
 
+
 ## 12. Project Folder Structure
 
+The project source code is organized into separate files based on their functionality.
+
+```text
 ATM-Simulator-LPC2148/
-│
 ├── README.md
-│
 ├── source_files/
 │   ├── main.c
 │   ├── atm.c
@@ -392,7 +394,6 @@ ATM-Simulator-LPC2148/
 │   ├── kpm.c
 │   ├── lcd.c
 │   └── delay.c
-│
 ├── header_files/
 │   ├── atm.h
 │   ├── interrupt.h
@@ -406,15 +407,14 @@ ATM-Simulator-LPC2148/
 │   ├── delay.h
 │   ├── defines.h
 │   └── types.h
-│
 ├── image/
 │   ├── log.jpeg
 │   ├── result1.jpeg
 │   └── result2.jpeg
-│
 └── videos/
     ├── resultonkit.mp4
     └── resultonpc.mp4
+```
 ## 13. Testing and Results
 
 The ATM Simulator was tested to verify the working of different operations and hardware components.
