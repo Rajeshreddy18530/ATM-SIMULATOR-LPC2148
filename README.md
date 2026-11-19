@@ -1,4 +1,4 @@
-gy# ATM Simulator with Real-Time Transaction Logging using LPC2148
+# ATM Simulator with Real-Time Transaction Logging using LPC2148
 
 ## 1. Project Overview
 
