@@ -379,9 +379,7 @@ The transaction log can contain:
 
 ## 12. Project Folder Structure
 
-The project source code is organized into separate files based on their functionality.
-
-ATM-SIMULATOR-LPC2148/
+ATM-Simulator-LPC2148/
 │
 ├── README.md
 │
@@ -415,9 +413,8 @@ ATM-SIMULATOR-LPC2148/
 │   └── result2.jpeg
 │
 └── videos/
-    ├── resultonkit/
-    └── resultonkit.mp4
-
+    ├── resultonkit.mp4
+    └── resultonpc.mp4
 ## 13. Testing and Results
 
 The ATM Simulator was tested to verify the working of different operations and hardware components.
